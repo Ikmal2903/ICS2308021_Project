@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IM Unity Fundraiser- Our Mission</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #c199dc, #2b5198);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #4a148c;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 1rem;
+            margin: 5px 0;
+            color: #333;
+        }
+
+        .social-media {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-media a {
+            text-decoration: none;
+            color: #4a148c;
+        }
+
+        .social-media img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .social-media img:hover {
+            transform: scale(1.1);
+        }
+
+        .social-media p {
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4a148c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .back-button:hover {
+            background-color: #e91e63;
+        }
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Our Mission</h2>
+        <p>At IM Unity Fundraiser,we enable communities through innovative fundraising solutions. We are on a mission to connect compassionate people with impactful projects that change lives.
+            Every donation counts, and we work to provide transparent and open ways for supporters to give. We unite and grow together, building a network of support that helps produce a more powerful future that serves all. 
+        </p>
+
+        <div class="contact-info">
+            <h3>Contact Us</h3>
+            <p>03-12442219</p>
+            <p>Email: contact@imunityfund.com</p>
+        </div>
+
+        <h3>Connect With Us</h3>
+        <div class="social-media">
+            <div>
+                <a href="" target="_blank">
+                    <img src="{% static 'images/IG.jpg' %}" alt="Instagram">
+                    <p>@IMUnityRaiser</p>
+                </a>
+            </div>
+            <div>
+                <a href="" target="_blank">
+                    <img src="{% static 'images/fb1.jpg' %}" alt="Facebook">
+                    <p>@UnityRaiser</p>
+                </a>
+            </div>
+        </div>
+
+        <a href="{% url 'index' %}" class="back-button">Back to Home</a>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy;2024 KPM Indera Mahkota - FundRaiser</p>
+            <p>Contact Us: 03-12442219</p>
+        </div>
+    </footer>
+
+</body>
+</html>

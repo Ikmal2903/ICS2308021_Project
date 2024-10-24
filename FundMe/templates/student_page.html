@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Page</title>
+    {% load static %}
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #c199dc, #2b5198);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Georgia', serif;
+        }
+        header {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 50px;
+            height: auto;
+            margin-right: 15px;
+        }
+        header h1 {
+            color: white;
+            font-size: 24px;
+            margin: 0;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 0 10px;
+            padding: 8px 12px;
+            border-radius: 50px;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px auto;
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            color: #4a148c;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .progress-container {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 20px;
+            padding: 5px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            display: block;
+            height: 20px;
+            background-color: #4caf50;
+            border-radius: 15px;
+            transition: width 0.3s ease;
+            width: 0%; /* Initial width set to 0 */
+        }
+        .progress-text {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        button {
+            background-color: #4a148c;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #e91e63;
+        }
+        button a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+            color: white;
+            margin-top: auto;
+            backdrop-filter: blur(5px);
+        }
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="IM Unity Logo">
+            <h1>IM Unity</h1>
+        </div>
+        <nav>
+            <a href="{% url 'view_history' %}">View History</a>
+            <a href="{% url 'logout' %}">Log Out</a>
+        </nav>
+    </header>
+
+    <h1>Welcome, {{ user_name }}!</h1>
+    <h2>Search Campaign</h2>
+    <form action="" method="get">
+        <input type="text" name="c_name" placeholder="Enter Campaign Name" style="padding: 10px; border-radius: 25px; border: 1px solid #ccc; width: 60%; margin: 10px 0;">
+        <input type="submit" value="SEARCH" style="padding: 10px 20px; background-color: #e91e63; color: #fff; border: none; border-radius: 25px; cursor: pointer;">
+    </form>
+
+    {% if data %}
+    <div class="card-container">
+        {% for campaign in data %}
+        <div class="card">
+            {% if campaign.campaign_image %}
+            <img src="{{ campaign.campaign_image.url }}" alt="Campaign Image">
+            {% else %}
+                <img src="{% static 'images/default.png' %}" alt="No image">
+            {% endif %}
+            <h3>{{ campaign.campaignname }}</h3>
+            <p><strong>Campaign ID:</strong> {{ campaign.campaignid }}</p>
+            <p><strong>Description:</strong> {{ campaign.description }}</p>
+            <div class="progress-container">
+                <div class="progress-text">RM{{ campaign.currentFunding }} raised</div>
+                <div class="progress-bar">
+                    <span class="progress-bar-fill" data-current="{{ campaign.currentFunding }}" data-goal="{{ campaign.goalAmount }}"></span>
+                </div>
+                <div class="goal-text">Goal: RM{{ campaign.goalAmount }}</div>
+            </div>
+            <button><a href="view_campaign/{{ campaign.campaignid }}">View</a></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p>No campaigns found.</p>
+    {% endif %}
+
+    <footer>
+        <a>© 2024 KPM Indera Mahkota - FundRaiser</a>
+        <a href="tel:0312442219">Contact Us: 03-12442219</a>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-bar-fill');
+            progressBars.forEach(bar => {
+                const currentFunding = parseFloat(bar.getAttribute('data-current'));
+                const goalAmount = parseFloat(bar.getAttribute('data-goal'));
+                const progress = goalAmount > 0 ? (currentFunding / goalAmount) * 100 : 0;
+                bar.style.width = progress.toFixed(2) + '%';
+            });
+        });
+    </script>
+</body>
+</html>

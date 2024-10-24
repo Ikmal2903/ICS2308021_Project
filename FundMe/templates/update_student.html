@@ -1,0 +1,114 @@
+{% load static %} <!-- Loading static for static files -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Campaign</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #c199dc, #2b5198);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+        }
+    
+        h2 {
+            font-size: 2rem;
+            color: #eeeeee;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+    
+        form input[type="text"],
+        form input[type="number"],
+        form input[type="date"],
+        form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+    
+        form input[type="submit"] {
+            background-color: #4a148c;
+            color: white;
+            font-size: 1rem;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+    
+        form input[type="submit"]:hover {
+            background-color: #e91e63;
+        }
+    
+        a {
+            text-decoration: none;
+            background-color: #4a148c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+    
+        a:hover {
+            background-color: #e91e63;
+        }
+
+        img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    
+    </style>    
+</head>
+<body>
+    <h2>UPDATE STUDENT</h2>
+    
+    <form action="save_update_student/{{ data.studentid }}" method="POST" enctype="multipart/form-data"> <!-- Enable file uploads -->
+
+        {% csrf_token %}
+        Student ID: <input type="text" name="studentid" value="{{ data.studentid }}" disabled><br><br>
+        Student Name: <input type="text" name="studentname" value="{{ data.studentname }}"><br><br>
+        Student Email: <input type="email" name="studentemail" value="{{ data.studentemail }}"><br><br>
+        Student Password: <input type="text" name="studentpassword" value="{{ data.studentpassword }}"><br><br>
+        Student Phone: <input type="text" name="studentphone" value="{{ data.studentphone }}"><br><br>
+        Student Address: <input type="text" name="studentaddress" value="{{ data.studentaddress }}"><br><br>
+        <input type="submit" value="SAVE"><br><br>
+
+    </form>
+
+    <a href="{% url 'view_list_student' %}">BACK</a>
+</body>
+</html>

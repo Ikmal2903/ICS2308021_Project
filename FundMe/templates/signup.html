@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    {% load static %}
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #c199dc, #2b5198);
+            background-size: cover;            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        header {
+            width: 100%;
+            background: #4a148c; /* Dark purple background */
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Deep shadow for header */
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 20px;
+            font-size: 18px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #e91e63; /* Hover background */
+        }
+
+        form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        form h2 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form h3 {
+            font-size: 18px;
+            color: #4a148c;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #4a148c;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #6a1b9a; /* Slightly lighter purple */
+        }
+
+        input:focus {
+            border-color: #4a148c;
+            outline: none;
+        }
+        
+        /* Footer styling */
+        footer {
+            background-color: #4a148c;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Deep shadow for footer */
+            margin-top: auto; /* Ensures the footer stays at the bottom */
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        footer a:hover {
+            color: #e91e63;
+            transition: color 0.3s;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        </nav>
+    </header>
+    <h1>Sign Up Now !!</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <h2>Enter Your Details</h2>
+
+        <h3>Full Name:</h3>
+        <input type="text" name="name" placeholder="Full Name">
+
+        <h3>Your ID:</h3>
+        <input type="text" name="id" placeholder="Your ID">
+
+        <h3>Email:</h3>
+        <input type="email" name="email" placeholder="Email">
+
+        <h3>Password:</h3>
+        <input type="text" name="password" placeholder="Password">
+
+        <h3>Phone Number:</h3>
+        <input type="text" name="phone" placeholder="01399XXXXXX">
+
+        <h3>Address</h3>
+        <input type="text" name="address" placeholder="Address">
+        
+        <h3>Role:</h3>
+        <input type="radio" id="student" name="role" value="STUDENT" required>
+        <label for="student">Student</label><br>
+        <input type="radio" id="staff" name="role" value="STAFF" required>
+        <label for="staff">Staff</label><br>
+
+        <input type="submit" value="SAVE">
+    </form><br>
+    <!-- Footer -->
+    <footer>
+        <a>© 2024 KPM Indera Mahkota - FundRaiser</a>
+        <a>Contact Us: 03-12442219</a>
+    </footer>
+    
+    
+</body>
+</html>

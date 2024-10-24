@@ -1,0 +1,127 @@
+{% load static %} <!-- Loading static for static files -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Campaign</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #c199dc, #2b5198);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+        }
+    
+        h2 {
+            font-size: 2rem;
+            color: #eeeeee;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+    
+        form input[type="text"],
+        form input[type="number"],
+        form input[type="date"],
+        form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+    
+        form input[type="submit"] {
+            background-color: #4a148c;
+            color: white;
+            font-size: 1rem;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+    
+        form input[type="submit"]:hover {
+            background-color: #e91e63;
+        }
+    
+        a {
+            text-decoration: none;
+            background-color: #4a148c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+    
+        a:hover {
+            background-color: #e91e63;
+        }
+
+        img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    
+    </style>    
+</head>
+<body>
+    <h2>UPDATE CAMPAIGN</h2>
+    
+    <form action="save_update_campaign/{{ data.campaignid }}" method="POST" enctype="multipart/form-data"> <!-- Enable file uploads -->
+
+        {% csrf_token %}
+        Campaign ID: <input type="text" name="campaignid" value="{{ data.campaignid }}" disabled><br><br>
+        Campaign Name: <input type="text" name="campaignname" value="{{ data.campaignname }}"><br><br>
+        Description: <input type="text" name="description" value="{{ data.description }}"><br><br>
+        GoalAmount: <input type="number" name="goalAmount" value="{{ data.goalAmount }}"><br><br>
+        Start Date: <input type="date" name="start_date" value="{{ data.start_date }}"><br><br>
+        End Date: <input type="date" name="end_date" value="{{ data.end_date }}"><br><br>
+
+        <!-- Show current campaign image if it exists -->
+        <h3>Current Campaign Image:</h3>
+        {% if data.campaign_image %}
+            <img src="{{ data.campaign_image.url }}" alt="Campaign Image">
+        {% else %}
+            <p>No image available</p>
+        {% endif %}
+        <br>
+
+        <!-- Image input to update the campaign image -->
+        <h3>Upload New Campaign Image:</h3>
+        <input type="file" name="campaign_image"><br><br>
+
+        <input type="submit" value="SAVE"><br><br>
+    </form>
+
+    <a href="{% url 'manage_campaign' %}">BACK</a>
+</body>
+</html>

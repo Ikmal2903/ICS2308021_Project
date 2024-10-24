@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Page</title>
+    {% load static %}
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #c199dc, #2b5198);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Georgia', serif;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px;
+            height: auto;
+            margin-right: 15px;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 0 10px;
+            padding: 8px 12px;
+            border-radius: 50px;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: #4a148c;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        button {
+            background-color: #4a148c;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #e91e63;
+        }
+
+        button a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="IM Unity Logo">
+            <h1>IM Unity</h1>
+        </div>
+        <nav>
+            <a href="{% url 'index' %}">Log Out</a>
+        </nav>
+    </header>
+
+    <h1></h1>
+
+    <div class="card-container">
+        <div class="card">
+            {% if mycampaign.campaign_image %}
+            <img src="{{ mycampaign.campaign_image.url }}" alt="Campaign Image">
+            {% else %}
+                <img src="{% static 'images/default.png' %}" alt="No image">
+            {% endif %}
+            <h3>{{ mycampaign.campaignname }}</h3>
+            <p><strong>Campaign ID:</strong> {{ mycampaign.campaignid }}</p>
+            <p><strong>Description:</strong> {{ mycampaign.description }}</p>
+            <p><strong>Goal Amount:</strong> RM{{ mycampaign.goalAmount }}</p>
+            <p class="funding-counter"><strong>Current Funding:</strong> RM{{ mycampaign.currentFunding }}</p>
+            <p><strong>Start Date:</strong> {{ mycampaign.start_date }}</p>
+            <p><strong>End Date:</strong> {{ mycampaign.end_date }}</p>
+            <button><a href="donation/{{ mycampaign.campaignid }}">Donate Now</a></button>
+        </div>
+    </div>
+    <button><a href="{% url 'student_page' %}">Back</a></button><br>
+
+    <!-- Footer -->
+    <footer>
+        <a>© 2024 KPM Indera Mahkota - FundRaiser</a>
+        <a href="tel:0312442219">Contact Us: 03-12442219</a>
+    </footer>
+</body>
+</html>

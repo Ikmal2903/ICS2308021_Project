@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IM Unity FundRaiser</title>
+    {% load static %}
+
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: url("{% static 'images/bg2.jpg' %}") no-repeat center center fixed;
+            background-size: cover; /* This makes the background image cover the entire viewport */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Ensures the body takes at least full viewport height */
+        }
+
+
+        h1 {
+            font-size: 3rem;
+            color: #e91e63;
+            text-align: center;
+            margin-top: 50px;
+            font-family: 'Georgia', serif;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(74, 20, 140, 0.9); /* Dark purple background with transparency */
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Deep shadow for header */
+        }
+
+        /* Style for the logo */
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px; /* Adjust logo size */
+            height: auto;
+            margin-right: 20px; /* Space between logo and text */
+        }
+
+        header h1 {
+            color: white;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 30px;
+            color: #e91e63;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 0 20px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #e91e63; /* Hover background for links */
+            color: white;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centers the button horizontally */
+            margin-top: 50px;
+            width: 100%;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #e91e63; /* Pink background for button */
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, box-shadow 0.3s;
+            width: 200px; /* Standard width for the button */
+            text-align: center;
+        }
+
+        button:hover {
+            background-color: #c2185b; /* Darker pink on hover */
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+        }
+
+        button a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: rgba(74, 20, 140, 0.9);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Deep shadow for footer */
+            margin-top: auto; /* Ensures the footer stays at the bottom */
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        footer a:hover {
+            color: #e91e63;
+            transition: color 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="IM Unity Logo">
+            <h1>IM Unity</h1>
+        </div>
+        <nav>
+            <a href="{% url 'aboutus' %}">About Us</a>
+            <a href="http://127.0.0.1:8000/admin/login/?next=/admin/">SuperUser</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        </nav>
+    </header>
+
+    <h1>IM Unity FundRaiser</h1>
+    <h2>Leading Funding Platform</h2>
+    
+    <!-- Button container to center the button -->
+    <div class="button-container">
+        <button><a href="{% url 'login' %}">Login Now</a></button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <a>© 2024 KPM Indera Mahkota - FundRaiser</a>
+        <a>Contact Us: 03-12442219</a>
+    </footer>
+
+</body>
+</html>

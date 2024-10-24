@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Campaign</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #c199dc, #2b5198);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+        }
+    
+        h1 {
+            font-size: 2rem;
+            color: #e5e5e5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 40px;
+        }
+    
+        form h1 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+    
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+    
+        input[type="submit"] {
+            background-color: #4a148c;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    
+        input[type="submit"]:hover {
+            background-color: #e91e63;
+        }
+    
+        table {
+            width: 100%;
+            max-width: 800px;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+    
+        table th,
+        table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    
+        table th {
+            background-color: #4a148c;
+            color: white;
+        }
+    
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+    
+        a {
+            color: #4a148c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    
+        a:hover {
+            color: #e91e63;
+        }
+    
+        button {
+            padding: 10px 20px;
+            background-color: #4a148c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+    
+        button:hover {
+            background-color: #e91e63;
+        }
+    
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+    
+        ul {
+            width: auto ;
+            max-width: auto;
+        }
+    
+        ul table {
+            margin: 0;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>ADD NEW CAMPAIGN</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Enter Campaign ID:</h1>
+        <input type="text" name="campaign_id" placeholder="CXXX"><br><br>
+        <h1>Enter Campaign Name:</h1>
+        <input type="text" name="campaign_name" placeholder="name"><br><br>
+        <h1>Enter Campaign Description:</h1>
+        <input type="text" name="description"><br><br>
+        <h1>Enter Amount Goal:</h1>
+        <input type="number" name="goalAmount"><br><br>
+        <h1>Enter Start Date:</h1>
+        <input type="date" name="start_date"><br><br>
+        <h1>Enter End Date:</h1>
+        <input type="date" name="end_date"><br><br>
+        <h1>Upload Campaign Image:</h1>
+        <input type="file" name="campaign_image"><br><br>
+        <input type="submit" value="SAVE"><br><br>
+    </form>
+    
+    <h1>Campaign Table</h1>
+    <ul>
+        {% for data in mycampaign %}
+        <table border="1">
+            <thead>
+                <th>CAMPAIGN_ID</th>
+                <th>CAMPAIGN_NAME</th>
+                <th>DESCRIPTION</th>
+                <th>GOAL_AMOUNT</th>
+                <th>START_DATE</th>
+                <th>END_DATE</th>
+                <th>IMAGE</th> <!-- New column for the image -->
+                <th>UPDATE?</th>
+                <th>DELETE</th>
+            </thead>
+            <tr>
+                <td>{{ data.campaignid }}</td>
+                <td>{{ data.campaignname }}</td>
+                <td>{{ data.description }}</td>
+                <td>{{ data.goalAmount }}</td>
+                <td>{{ data.start_date }}</td>
+                <td>{{ data.end_date }}</td>
+                <td>
+                    {% if data.campaign_image %}
+                        <img src="{{ data.campaign_image.url }}" alt="Campaign Image" style="width: 100px; height: auto;">
+                    {% else %}
+                        No image
+                    {% endif %}
+                </td>
+                <td><button><a href="update_campaign/{{ data.campaignid }}">UPDATE</a></button></td>
+                <td><button><a href="delete_campaign/{{ data.campaignid }}">DELETE</a></button></td>
+            </tr>
+        {% endfor %}
+        </table>
+    </ul>
+    <br>
+    
+</ul>
+<button><a href="{% url 'staff_page' %}">BACK</button>
+    
+</body>
+</html>

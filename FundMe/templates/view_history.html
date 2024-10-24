@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View History</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #c199dc, #2b5198);
+            padding: 20px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        h1 {
+            font-size: 2.5rem;
+            color: #4a148c;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    
+        table {
+            width: 100%;
+            max-width: 800px;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        th, td {
+            padding: 12px 20px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+    
+        th {
+            background-color: #4a148c;
+            color: white;
+            font-size: 1.1rem;
+        }
+    
+        td {
+            font-size: 1rem;
+            background-color: #fff;
+        }
+    
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+    
+        /* Style the back button */
+        button {
+            padding: 10px 20px;
+            background-color: #4a148c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            
+        }
+    
+        button:hover {
+            background-color: #e91e63;
+        }
+    
+        /* Style the anchor tag inside button */
+        button a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    
+</head>
+<body>
+    <h2>Search History</h2>
+    <center><form action="" method="get">
+        <input type="date" name="d_date" placeholder="Select Donation Date" style="padding: 10px; border-radius: 25px; border: 1px solid #ccc; width: 60%; margin: 10px 0;">
+        <input type="submit" value="SEARCH" style="padding: 10px 20px; background-color: #e91e63; color: #fff; border: none; border-radius: 25px; cursor: pointer;">
+    </form></center>
+{% if donation %}
+<h1>List Of Donations</h1>
+<ul>
+    {% for data in donation %}
+    <table border="1">
+        <thead>
+            <th>DONATION DATE</th>
+            <th>AMOUNT</th>
+            <th>PAYMENT METHOD</th>
+            <th>CAMPAIGN NAME</th>
+            <th>STUDENT ID</th>
+        </thead>
+        <tr>
+            <td>{{data.donationdate}}</td>
+            <td>{{data.amount}}</td>
+            <td>{{data.paymentmethod}}</td>
+            <td>{{data.campaignid}}</td>
+            <td>{{data.studentid}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</ul>
+{% else %}
+<p>No history found.</p>
+{% endif %}
+<button><a href="{% url 'student_page' %}">BACK</button>
+
+</body>
+</html>
